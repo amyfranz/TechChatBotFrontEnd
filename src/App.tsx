@@ -65,6 +65,13 @@ export default class App extends Component {
     bot_reply: { bot_response: string };
     human_reply: [];
   }) => {
+    const botResponseTime = result.bot_reply.bot_response.length * 300;
+    const time =
+      botResponseTime * 150 < 2000
+        ? 2000
+        : botResponseTime * 150 > 5000
+        ? 5000
+        : botResponseTime;
     setTimeout(
       () =>
         this.setState({
@@ -76,8 +83,11 @@ export default class App extends Component {
             },
           ],
         }),
-      2000
+      time
     );
-    setTimeout(() => this.setState({ responses: result.human_reply }), 3000);
+    setTimeout(
+      () => this.setState({ responses: result.human_reply }),
+      time + 1000
+    );
   };
 }
