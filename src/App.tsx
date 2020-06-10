@@ -7,26 +7,19 @@ import "./App.css";
 export default class App extends Component {
   private scrollTarget = React.createRef<HTMLDivElement>();
 
-  componentDidUpdate() {
-    this.scrollToBottom(); //scroll to bottom when new message was added
-  }
-
-  scrollToBottom = () => {
-    const node: HTMLDivElement | null = this.scrollTarget.current; //get the element via ref
-
-    if (node) {
-      //current ref can be null, so we have to check
-      node.scrollIntoView({ behavior: "smooth" }); //scroll to the targeted element
-    }
-  };
-
   state = {
     messages: [] as Array<Message>,
     responses: [] as Array<ChoiceButton>,
   };
+
   componentDidMount() {
     this.fetchRequest("intro");
   }
+
+  componentDidUpdate() {
+    this.scrollToBottom(); //scroll to bottom when new message was added
+  }
+
   render() {
     if (this.state.messages.length > 0)
       return (
@@ -56,22 +49,46 @@ export default class App extends Component {
     });
     this.fetchRequest(key_phrase);
   };
+
   fetchRequest = async (key_phrase: string) => {
     let result: object | null = null;
     await fetchKey(key_phrase).then((data) => (result = data));
     if (result !== null) this.setChatAndButtons(result);
   };
+
   setChatAndButtons = async (result: {
     bot_reply: { bot_response: string };
     human_reply: [];
   }) => {
-    const botResponseTime = result.bot_reply.bot_response.length * 300;
+    const botResponseTime = result.bot_reply.bot_response.length * 100;
     const time =
-      botResponseTime * 150 < 2000
+      botResponseTime < 2000
         ? 2000
-        : botResponseTime * 150 > 5000
+        : botResponseTime > 5000
         ? 5000
         : botResponseTime;
+        setTimeout(
+          () =>
+            this.setState({
+              messages: [
+                ...this.state.messages,
+                {
+                  message: "...",
+                  sender: "bot",
+                },
+              ],
+            }),
+          500
+        );
+        setTimeout(
+          () =>
+            this.setState({
+              messages: [
+                ...this.state.messages.splice(0, this.state.messages.length -1 )
+              ],
+            }),
+          time - 250
+        );
     setTimeout(
       () =>
         this.setState({
@@ -89,5 +106,13 @@ export default class App extends Component {
       () => this.setState({ responses: result.human_reply }),
       time + 1000
     );
+  };
+  scrollToBottom = () => {
+    const node: HTMLDivElement | null = this.scrollTarget.current; //get the element via ref
+
+    if (node) {
+      //current ref can be null, so we have to check
+      node.scrollIntoView({ behavior: "smooth" }); //scroll to the targeted element
+    }
   };
 }
