@@ -1,53 +1,144 @@
-.fullpage {
-  height: 98vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.chatApp {
-  background-color: rgb(237, 248, 247);
-  width: 35%;
-  height: 80vh;
-  overflow-y: scroll;
-  padding: 2rem;
-  border-radius: 1rem;
-  border: darkslategray solid;
-  display: flex;
-  flex-direction: column;
+:root {
+  /* width: 100%; */
+  margin: 0%;
 }
 .chats {
   display: flex;
   flex-direction: column;
+  width: 290px;
 }
+
 .human {
-  background-color: rgba(250, 245, 197, 0.9);
   align-self: flex-end;
-  width: auto;
-  max-width: 600px;
-  margin-bottom: 10px;
+  margin: 5px;
+  background-color: rgba(250, 245, 197, 0.9);
+  width: 150px;
   padding: 0.5rem;
-  border-radius: 1rem;
+  border-radius: 0.3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.human p {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
 }
 
 .bot {
-  background-color: rgba(197, 250, 204, 0.9);
-  width: auto;
-  max-width: 600px;
-  align-self: flex-start;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 5px;
+  background-color: rgba(197, 250, 221, 0.9);
+  width: 150px;
   padding: 0.5rem;
-  border-radius: 1rem;
+  border-radius: 0.3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.bot p {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
 }
 .responseButtonsDiv {
   display: flex;
-  flex-direction: column;
-  align-self: flex-end;
-  margin-bottom: 8rem;
+  flex-direction: row;
+  overflow-x: scroll;
+  margin-top: 2rem;
+  height: 55px;
+  justify-content: center;
 }
 .responseButton {
-  max-width: 600px;
-  background-color: rgb(233, 197, 247);
-  border-radius: none;
-  border: outset rgb(233, 197, 247);
+  font-size: 20px;
+  width: fit-content;
+  background-color: rgb(225, 213, 241);
+  border-radius: 6px;
+  margin: 10px;
+  padding: 0.3rem;
+  border: rgb(233, 197, 247);
+  white-space: nowrap;
+}
+/* iPhone X */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  background: #f5f5f5;
+}
+
+.iphone {
+  height: 750px;
+  width: 400px;
+  position: absolute;
+  margin: auto;
+  top: 60px;
+  bottom: 80px;
+  left: 0px;
+  right: 0px;
+  background: url("https://hoidrop.s3-us-west-2.amazonaws.com/cp_social_app_iphone.png")
+    no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.screen {
+  height: 525px;
+  width: 296px;
+  position: absolute;
+  top: 110px;
+  left: 53px;
+  overflow: hidden;
+  position: relative;
+  background-color: white;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+/*	Content */
+
+.statusDiv {
+  position: fixed;
+  top: 120px;
+  z-index: 200;
+  height: 20px;
+  width: 296px;
+  background-color: white;
+}
+
+.status {
+  position: fixed;
+  top: 125px;
+  z-index: 200;
+  height: 10px;
+  width: 296px;
+  background: url("https://hoidrop.s3-us-west-2.amazonaws.com/cp_social_app_status_black.png")
+    no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.status.active {
+  background-image: url("https://hoidrop.s3-us-west-2.amazonaws.com/cp_social_app_status_white.png");
+}
+
+.content {
+  position: absolute;
+  top: 20px;
+  width: 290px;
+  height: auto;
+  min-height: 499px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: rgb(188, 242, 242);
+  background: linear-gradient(
+    0deg,
+    rgba(188, 242, 242, 1) 0%,
+    rgba(241, 195, 236, 1) 100%
+  );
+  padding: 3px;
 }

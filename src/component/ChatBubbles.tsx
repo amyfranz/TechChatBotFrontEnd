@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 interface ChatBubblesProps {
   messages: Array<Message>;
@@ -6,22 +6,10 @@ interface ChatBubblesProps {
 
 export const ChatBubbles: React.SFC<ChatBubblesProps> = ({ messages }) => {
   const messageRender = messages.map((message, index) => (
-    <p key={index} className={message.sender}>
-      {message.message}
-    </p>
-  ));
-  let [showDot, setShowDot] = useState(false)
-
-  useEffect(() => {
-    if (!showDot){
-      setTimeout(() => setShowDot(true), 1200)
-    } 
-  })
-
-  return(
-    <div className="chats">
-      {messageRender}
-      {/* {messages[messages.length -1].sender === "human" && showDot && <p key="dotdotdot" className="bot">...</p>} */}
+    <div key={index} className={message.sender}>
+      <p>{message.message}</p>
     </div>
-    )
+  ));
+
+  return <div className="chats">{messageRender}</div>;
 };

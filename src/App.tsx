@@ -23,19 +23,26 @@ export default class App extends Component {
   render() {
     if (this.state.messages.length > 0)
       return (
-        <div className="fullpage">
-          <div className="chatApp">
-            <ChatBubbles messages={this.state.messages} />
-            <ResponseBubbles
-              responses={this.state.responses}
-              handleClick={this.handleClick}
-            />
-            <div
-              ref={this.scrollTarget}
-              data-explanation="This is where we scroll to"
-            ></div>
+        <body>
+          <div className="iphone">
+            <div className="screen">
+              <div className="statusDiv">
+                <div className="status"></div>
+              </div>
+              <div className="content ">
+                <ChatBubbles messages={this.state.messages} />
+                <ResponseBubbles
+                  responses={this.state.responses}
+                  handleClick={this.handleClick}
+                />
+                <div
+                  ref={this.scrollTarget}
+                  data-explanation="This is where we scroll to"
+                ></div>
+              </div>
+            </div>
           </div>
-        </div>
+        </body>
       );
     else return <div></div>;
   }
@@ -67,28 +74,28 @@ export default class App extends Component {
         : botResponseTime > 5000
         ? 5000
         : botResponseTime;
-        setTimeout(
-          () =>
-            this.setState({
-              messages: [
-                ...this.state.messages,
-                {
-                  message: "...",
-                  sender: "bot",
-                },
-              ],
-            }),
-          500
-        );
-        setTimeout(
-          () =>
-            this.setState({
-              messages: [
-                ...this.state.messages.splice(0, this.state.messages.length -1 )
-              ],
-            }),
-          time - 250
-        );
+    setTimeout(
+      () =>
+        this.setState({
+          messages: [
+            ...this.state.messages,
+            {
+              message: "...",
+              sender: "bot",
+            },
+          ],
+        }),
+      500
+    );
+    setTimeout(
+      () =>
+        this.setState({
+          messages: [
+            ...this.state.messages.splice(0, this.state.messages.length - 1),
+          ],
+        }),
+      time - 250
+    );
     setTimeout(
       () =>
         this.setState({
@@ -104,7 +111,7 @@ export default class App extends Component {
     );
     setTimeout(
       () => this.setState({ responses: result.human_reply }),
-      time + 1000
+      time + 500
     );
   };
   scrollToBottom = () => {
