@@ -40,6 +40,9 @@
   padding: 0px;
   text-align: center;
 }
+.bot img {
+  width: 100px;
+}
 .responseButtonsDiv {
   display: flex;
   flex-direction: row;

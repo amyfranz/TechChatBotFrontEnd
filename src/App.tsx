@@ -51,7 +51,7 @@ export default class App extends Component {
       responses: [],
       messages: [
         ...this.state.messages,
-        { message: human_response, sender: "human" },
+        { message: human_response, sender: "human", image: false },
       ],
     });
     this.fetchRequest(key_phrase);
@@ -65,16 +65,20 @@ export default class App extends Component {
     bot_reply: Array<BotReply>;
     human_reply: [];
   }) => {
-    result.bot_reply.map((reply: BotReply, index) => {
-      this.setIndividualChat(reply.bot_response, index);
-    });
+    result.bot_reply.map((reply: BotReply, index) =>
+      this.setIndividualChat(reply.bot_response, reply.image, index)
+    );
     setTimeout(
       () => this.setState({ responses: result.human_reply }),
-      200 + (3000 * (result.bot_reply.length))
+      200 + 3000 * result.bot_reply.length
     );
   };
 
-  setIndividualChat = async (bot_response: string, index: number) => {
+  setIndividualChat = async (
+    bot_response: string,
+    image: boolean,
+    index: number
+  ) => {
     console.log("test3");
     const botResponseTime = bot_response.length * 100;
     const time =
@@ -93,6 +97,7 @@ export default class App extends Component {
               {
                 message: "...",
                 sender: "bot",
+                image: false,
               },
             ],
           }),
@@ -112,11 +117,12 @@ export default class App extends Component {
             {
               message: bot_response,
               sender: "bot",
+              image,
             },
           ],
         });
       }, time);
-    }, 3000 * (index));
+    }, 3000 * index);
   };
   scrollToBottom = () => {
     const node: HTMLDivElement | null = this.scrollTarget.current; //get the element via ref
