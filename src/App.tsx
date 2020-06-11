@@ -58,61 +58,65 @@ export default class App extends Component {
   };
 
   fetchRequest = async (key_phrase: string) => {
-    let result: object | null = null;
-    await fetchKey(key_phrase).then((data) => (result = data));
-    if (result !== null) this.setChatAndButtons(result);
+    await fetchKey(key_phrase).then((data) => this.setChatAndButtons(data));
   };
 
   setChatAndButtons = async (result: {
-    bot_reply: { bot_response: string };
+    bot_reply: Array<BotReply>;
     human_reply: [];
   }) => {
-    const botResponseTime = result.bot_reply.bot_response.length * 100;
+    result.bot_reply.map((reply: BotReply, index) => {
+      this.setIndividualChat(reply.bot_response, index);
+    });
+    setTimeout(
+      () => this.setState({ responses: result.human_reply }),
+      200 + (3000 * (result.bot_reply.length))
+    );
+  };
+
+  setIndividualChat = async (bot_response: string, index: number) => {
+    console.log("test3");
+    const botResponseTime = bot_response.length * 100;
     const time =
       botResponseTime < 2000
         ? 2000
-        : botResponseTime > 5000
-        ? 5000
+        : botResponseTime > 3000
+        ? 3000
         : botResponseTime;
-    setTimeout(
-      () =>
-        this.setState({
-          messages: [
-            ...this.state.messages,
-            {
-              message: "...",
-              sender: "bot",
-            },
-          ],
-        }),
-      500
-    );
-    setTimeout(
-      () =>
+
+    setTimeout(() => {
+      setTimeout(
+        () =>
+          this.setState({
+            messages: [
+              ...this.state.messages,
+              {
+                message: "...",
+                sender: "bot",
+              },
+            ],
+          }),
+        500
+      );
+      setTimeout(() => {
         this.setState({
           messages: [
             ...this.state.messages.splice(0, this.state.messages.length - 1),
           ],
-        }),
-      time - 250
-    );
-    setTimeout(
-      () =>
+        });
+      }, time - 250);
+      setTimeout(() => {
         this.setState({
           messages: [
             ...this.state.messages,
             {
-              message: result.bot_reply.bot_response,
+              message: bot_response,
               sender: "bot",
             },
           ],
-        }),
-      time
-    );
-    setTimeout(
-      () => this.setState({ responses: result.human_reply }),
-      time + 500
-    );
+        });
+      }, time);
+    }, 3000 * (index));
   };
   scrollToBottom = () => {
     const node: HTMLDivElement | null = this.scrollTarget.current; //get the element via ref
