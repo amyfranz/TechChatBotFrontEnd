@@ -9,7 +9,6 @@ export const ResponseBubbles: React.FC<ResponseBubblesProps> = ({
   responses,
   handleClick,
 }) => {
-  //   let [buttons, setButtons]: any = useState();
   const buttons = responses.map((response, index) => (
     <button
       key={index}
