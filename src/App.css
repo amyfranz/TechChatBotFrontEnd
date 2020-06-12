@@ -1,18 +1,42 @@
 :root {
-  /* width: 100%; */
   margin: 0%;
+  padding: 0%;
 }
+.screen {
+  padding: 0px;
+  margin: 0px;
+  top: 0px;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: rgb(188, 242, 242);
+  background: linear-gradient(
+      0deg,
+      rgba(188, 242, 242, 1) 0%,
+      rgba(241, 195, 236, 1) 100%
+    )
+    top right no-repeat fixed;
+}
+
 .chats {
   display: flex;
   flex-direction: column;
-  width: 290px;
+  width: 100%;
 }
 
 .human {
   align-self: flex-end;
-  margin: 5px;
+  margin: 1rem;
   background-color: rgba(250, 245, 197, 0.9);
-  width: 150px;
+  width: 50%;
   padding: 0.5rem;
   border-radius: 0.3rem;
   display: flex;
@@ -26,9 +50,9 @@
 }
 
 .bot {
-  margin: 5px;
+  margin: 0.5rem 1rem;
   background-color: rgba(197, 250, 221, 0.9);
-  width: 150px;
+  width: 50%;
   padding: 0.5rem;
   border-radius: 0.3rem;
   display: flex;
@@ -40,16 +64,25 @@
   padding: 0px;
   text-align: center;
 }
-.bot img {
-  width: 100px;
+
+.bot.image {
+  padding: 0;
+  background-color: unset;
+  width: auto;
+  justify-content: flex-start;
 }
+
+.bot img {
+  width: 80%;
+}
+
 .responseButtonsDiv {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
-  margin-top: 2rem;
-  height: 55px;
-  justify-content: center;
+  margin: 2rem 1rem 0 1rem;
+  width: auto;
+  justify-content: flex-start;
 }
 .responseButton {
   font-size: 20px;
@@ -60,87 +93,65 @@
   border: rgb(233, 197, 247);
   white-space: nowrap;
 }
-/* iPhone X */
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  margin: 0;
-  background: #f5f5f5;
-}
+@media (min-width: 1025px) {
+  .page {
+    display: flex;
+    width: 93vw;
+    height: 93vh;
+    justify-content: center;
+    align-items: center;
+  }
+  .iphone {
+    margin: auto;
+    height: 90vh;
+    width: 48.33vh;
+    background: url("https://hoidrop.s3-us-west-2.amazonaws.com/cp_social_app_iphone.png")
+      no-repeat center center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .screen {
+    width: 72%;
+    height: 62vh;
+    overflow: hidden;
+    position: relative;
+    background-color: white;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
 
-.iphone {
-  height: 750px;
-  width: 400px;
-  position: absolute;
-  margin: auto;
-  top: 60px;
-  bottom: 80px;
-  left: 0px;
-  right: 0px;
-  background: url("https://hoidrop.s3-us-west-2.amazonaws.com/cp_social_app_iphone.png")
-    no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.screen {
-  height: 525px;
-  width: 296px;
-  position: absolute;
-  top: 110px;
-  left: 53px;
-  overflow: hidden;
-  position: relative;
-  background-color: white;
-  overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-}
+  .content {
+    min-height: 62vh;
+    overflow-y: scroll;
+  }
 
-/*	Content */
+  .statusDiv {
+    position: fixed;
+    z-index: 200;
+    height: 2vh;
+    width: 34.9vh;
+    background-color: rgb(255, 255, 255);
+  }
 
-.statusDiv {
-  position: fixed;
-  top: 120px;
-  z-index: 200;
-  height: 20px;
-  width: 296px;
-  background-color: white;
-}
-
-.status {
-  position: fixed;
-  top: 125px;
-  z-index: 200;
-  height: 10px;
-  width: 296px;
-  background: url("https://hoidrop.s3-us-west-2.amazonaws.com/cp_social_app_status_black.png")
-    no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.status.active {
-  background-image: url("https://hoidrop.s3-us-west-2.amazonaws.com/cp_social_app_status_white.png");
-}
-
-.content {
-  position: absolute;
-  top: 20px;
-  width: 290px;
-  height: auto;
-  min-height: 499px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  background: rgb(188, 242, 242);
-  background: linear-gradient(
-    0deg,
-    rgba(188, 242, 242, 1) 0%,
-    rgba(241, 195, 236, 1) 100%
-  );
-  padding: 3px;
+  .status {
+    position: fixed;
+    z-index: 200;
+    width: 35vh;
+    height: 2vh;
+    background: url("https://hoidrop.s3-us-west-2.amazonaws.com/cp_social_app_status_black.png")
+      no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
 }

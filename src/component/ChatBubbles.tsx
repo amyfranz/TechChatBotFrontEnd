@@ -6,7 +6,10 @@ interface ChatBubblesProps {
 
 export const ChatBubbles: React.SFC<ChatBubblesProps> = ({ messages }) => {
   const messageRender = messages.map((message, index) => (
-    <div key={index} className={message.sender}>
+    <div
+      key={index}
+      className={`${message.sender} ${message.image ? "image" : ""}`}
+    >
       {message.image ? (
         <img src={message.message} alt="" />
       ) : (

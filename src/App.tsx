@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { fetchKey } from "./API";
 import { ChatBubbles } from "./component/ChatBubbles";
 import { ResponseBubbles } from "./component/ResponseBubbles";
@@ -21,30 +21,32 @@ export default class App extends Component {
   }
 
   render() {
-    if (this.state.messages.length > 0)
-      return (
-        <body>
-          <div className="iphone">
-            <div className="screen">
-              <div className="statusDiv">
-                <div className="status"></div>
-              </div>
-              <div className="content ">
-                <ChatBubbles messages={this.state.messages} />
-                <ResponseBubbles
-                  responses={this.state.responses}
-                  handleClick={this.handleClick}
-                />
-                <div
-                  ref={this.scrollTarget}
-                  data-explanation="This is where we scroll to"
-                ></div>
-              </div>
+    return (
+      <div className="page">
+        <div className="iphone">
+          <div className="screen">
+            <div className="statusDiv">
+              <div className="status"></div>
+            </div>
+            <div className="content ">
+              {this.state.messages.length > 0 ? (
+                <Fragment>
+                  <ChatBubbles messages={this.state.messages} />
+                  <ResponseBubbles
+                    responses={this.state.responses}
+                    handleClick={this.handleClick}
+                  />
+                  <div
+                    ref={this.scrollTarget}
+                    data-explanation="This is where we scroll to"
+                  ></div>
+                </Fragment>
+              ) : null}
             </div>
           </div>
-        </body>
-      );
-    else return <div></div>;
+        </div>
+      </div>
+    );
   }
   handleClick = async (key_phrase: string, human_response: string) => {
     await this.setState({
