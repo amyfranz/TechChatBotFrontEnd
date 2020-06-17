@@ -81,7 +81,6 @@ export default class App extends Component {
     image: boolean,
     index: number
   ) => {
-    console.log("test3");
     const botResponseTime = bot_response.length * 100;
     const time =
       botResponseTime < 2000
